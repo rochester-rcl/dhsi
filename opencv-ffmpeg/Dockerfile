@@ -17,6 +17,13 @@ RUN apt-get update \
   libgtk-3-dev \
   libatlas-base-dev \
   gfortran \
+  libavcodec-dev \
+  libavformat-dev \
+  libswscale-dev \
+  libavresample-dev \
+  libv4l-dev \
+  libxvidcore-dev \
+  libx264-dev \
   ffmpeg \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && mkdir /home/opencv/ \
@@ -38,8 +45,8 @@ RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D INSTALL_C_EXAMPLES=OFF \
-    -DBUILD_opencv_java=OFF \
-    -DWITH_CUDA=OFF \
+    -D BUILD_opencv_java=OFF \
+    -D WITH_CUDA=OFF \
     -D OPENCV_EXTRA_MODULES_PATH=/home/opencv/opencv_contrib-3.2.0/modules \
     -D PYTHON_EXECUTABLE=/usr/bin/python3 \
     -D BUILD_EXAMPLES=OFF .. \
@@ -51,5 +58,5 @@ RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip \
     && rm opencv.zip \
     && rm -rf opencv_contrib-3.2.0 \
     && rm opencv_contrib.zip
-    
+
   WORKDIR /home
