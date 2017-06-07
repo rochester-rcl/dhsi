@@ -5,16 +5,17 @@ import cv2
 import sys
 import os
 
-# argparse
-import argparse
+# easy io parser
+from io_parser import IOParser
 
+# video io
 from videoreader import VideoReader
 
 
 class VideoWriter(object):
     # just an example of how we can map containers to preset codecs
     FOURCC_MAP = {
-        '.mp4': 'DIVX',
+        '.mp4': 'X264',
         '.mkv': 'X264',
         '.mov': 'H264',
     }
@@ -47,16 +48,9 @@ class VideoWriter(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Test that the reader works")
-    parser.add_argument('-i', '--input_file', help="input video file path", required="true", type=str)
-    parser.add_argument('-o', '--output_file', help="output video file path", required="true", type=str)
-
-    args = vars(parser.parse_args())
-    input_file = args['input_file']
-    output_path = args['output_file']
-
-    reader = VideoReader(input_file)
-    writer = VideoWriter(output_path, 24.0, (320, 240))
+    parser = IOParser()
+    reader = VideoReader(parser.input_file)
+    writer = VideoWriter(parser.output_file, reader.fps, (reader.width, reader.height))
 
     for frame in reader:
         writer.write_frame(frame)

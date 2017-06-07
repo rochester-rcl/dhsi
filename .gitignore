@@ -43,3 +43,15 @@ shared/
 # JetBrains #
 #############
 *.idea/
+
+# Media #
+#########
+
+*.mp4
+*.mpv
+*.mkv
+
+# Python #
+##########
+
+__pycache__/

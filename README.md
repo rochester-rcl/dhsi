@@ -1,6 +1,6 @@
 ## Understanding Digital Video DHSI 2017 | Course Materials
 
-#### How to install the Docker images
+### How to install the Docker images
 First, install [Docker CE](https://www.docker.com/community-edition#/download)
 
  Once you have Docker from anywhere on your machine you can run
@@ -11,7 +11,7 @@ or
 
 `docker pull jromphf/node-vjs-artoolkit:0.0.1`
 
-#### How to run the Docker containers
+### How to run the Docker containers
 Once you have pulled the images, you can run them in an interactive bash session with the following command:
 
 `docker run -ti jromphf/python3-opencv-ffmpeg:0.0.1 bash`
@@ -27,7 +27,7 @@ To mount a shared volume, you can run the container with the *-v* flag:
 Where [path/to/folder/on/host] is the **absolute path** to the folder on the host file system and [/path/to/folder/on/container] is the **absolute path** specifying where the directory will be mounted on the container's file system.
 
 
-#### Cleanup
+### Cleanup
 When you're finished with your containers, you can stop any running containers and / or delete them:
 
 *To stop all containers (active or otherwise):*
@@ -53,7 +53,7 @@ If you're interested, the offending file is:
 *~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2*
 
 
-#### How to build your own images
+### How to build your own images
 
 Both of the project subdirectories (*python3-opencv-ffmpeg* and *node-vjs-artoolkit*) contain Dockerfiles for building the images. If you want to build your own image you can *cd* into either of those directories and run
 
