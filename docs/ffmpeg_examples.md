@@ -50,7 +50,7 @@
 	ffmpeg -i /path/to/input -ss 00:00:00 -to 00:00:30 -c:v libx264 /path/to/output #export first 30 seconds of a video
 
 	#Export a single frame as an image
-	ffmpeg -i input.flv -ss 00:00:14.435 -vframes 1 out.png
+	ffmpeg -i /path/to/input -ss 00:00:14.435 -vframes 1 /path/to/output.png
 
 	#Export to a dpx sequence
 	ffmpeg -i input -r 24 -an -pix_fmt rgb24 /output/frames/frame_%06d.dpx
@@ -58,13 +58,37 @@
 	#Animate an image sequence
 	ffmpeg -i frames/frame_%06d.dpx -r 24 -vcodec prores -profile:v 2 out.mov #0 : ProRes422 (Proxy) 1 : ProRes422 (LT) 2 : ProRes422 (Normal) 3 : ProRes422 (HQ)
 
+	#Altering framerates / time bases
+	ffmpeg -i /path/to/input -c:v libx264 -vf setpts=0.5*PTS /path/to/output.mp4
+
+	# Alters the actual presentation time stamp so that the playback is 2x faster
+
+	ffmpeg -i /path/to/input -c:v libx264 -vf setpts=2.0*PTS /path/to/output.mp4
+
+	# Alters the presentation time stamp so the playback is 2x slower
+
 #### 5. Image Manipulation
 
 	#Scale
 	ffmpeg -i /path/to/input -c:v libx264 -vf scale=1920:1080 /path/to/output.mp4 #w:h
 
 	#Crop
-	
+	ffmpeg -i /path/to/input -c:v libx264 -vf crop=100:100:0:0 /path/to/output.mp4
+	# will crop a video to 100x100 square starting in the top left corner (crop=w:h:x_start:y_start)
+
+	#Color grading (like Photoshop levels)
+	ffmpeg -i /path/to/input -c:v libx264 -vf colorlevels=romin=0.5:gomin=0:bomin=0.5 /path/to/output.mp4
+
+	# will increase brightness in all darker areas of the image
+	# x_(where x_ could be r,g,b, or alpha)
+	# x_imin = input black point
+	# x_omin = output black point
+	# x_imax = input white point
+	# x_omax = output white point
+	# more on levels here: https://helpx.adobe.com/photoshop/using/levels-adjustment.html
+
+	#Chaining filters
+	ffmpeg -i /path/to/input -c:v libx264 -vf crop=100:100:0:0,
 
 #### 6. Batch Processing
 
