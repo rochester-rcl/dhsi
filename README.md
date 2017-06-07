@@ -20,6 +20,12 @@ or
 
 `docker run -ti jromphf/node-vjs-artoolkit:0.0.1`
 
+To mount a shared volume, you can run the container with the *-v* flag:
+
+`docker run -ti -v [/path/to/folder/on/host]:[/path/to/folder/on/container] [...]`
+
+Where [path/to/folder/on/host] is the **absolute path** to the folder on the host file system and [/path/to/folder/on/container] is the **absolute path** specifying where the directory will be mounted on the container's file system.
+
 
 #### Cleanup
 When you're finished with your containers, you can stop any running containers and / or delete them:
@@ -42,6 +48,9 @@ If you are looking to automate this process, check out
 **FOR MAC USERS**
 
 Please note that DockerCE for Mac does not properly release disk space after all of your containers and images have been deleted. It's not uncommon to see disk space balloon to extreme levels (>30GB!) after running Docker for a while. One option is to reset Docker by opening the application, and selecting preferences ---> Reset (the :bomb: icon). **This will remove all containers and images.**
+
+If you're interested, the offending file is:
+*~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2*
 
 
 #### How to build your own images
