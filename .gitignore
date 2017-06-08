@@ -53,5 +53,10 @@ shared/
 
 # Python #
 ##########
-
+MANIFEST
+dist/
+build/
+*.egg-info
+dist/
+build/
 __pycache__/
