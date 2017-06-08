@@ -20,12 +20,18 @@ class VideoWriter(object):
         '.mov': 'H264',
     }
 
-    def __init__(self, output_path, fps, resolution):
+    def __init__(self, output_path, fps, resolution, **kwargs):
         self.output_path = VideoWriter.resolve_path(output_path)
         self.codec = VideoWriter.map_fourcc(output_path)
         self.resolution = resolution
         self.fps = fps
-        self._writer = cv2.VideoWriter(self.output_path, self.codec, self.fps, self.resolution)
+
+        try:
+            self.color = kwargs['color']
+        except KeyError:
+            self.color = True
+
+        self._writer = cv2.VideoWriter(self.output_path, self.codec, self.fps, self.resolution, self.color)
 
     def write_frame(self, frame):
         self._writer.write(frame)
