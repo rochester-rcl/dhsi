@@ -4,6 +4,10 @@ FROM phusion/baseimage:0.9.22
 CMD ["/sbin/my_init"]
 
 RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  build-essential \
+  python \
+  rsync \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
 # Replace shell with bash so we can source files

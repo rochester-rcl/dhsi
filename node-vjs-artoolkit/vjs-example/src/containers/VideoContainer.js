@@ -4,17 +4,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Containers
+// Components
 import VideoPlayer from '../components/VideoPlayer';
+import AnnotationList from '../components/AnnotationList';
 
 class VideoContainer extends Component {
+  state = { annotations: [] };
   constructor(props: Object) {
     super(props);
   }
-  render(){
+  render() {
     const { src, playerOptions, plugins } = this.props;
+    let { annotations } = this.state;
+    if (annotations.length === 0) {
+      annotations = [{
+        timecode: '00:00:00',
+        text: 'No annotations',
+      }];
+    }
+    console.log(annotations);
     return(
-      <VideoPlayer src={src} playerOptions={playerOptions} plugins={plugins}/>
+      <div className="video-annotator-container">
+        <VideoPlayer src={src} playerOptions={playerOptions} plugins={plugins} />
+        <AnnotationList annotations={annotations} />
+      </div>
     );
   }
 }
