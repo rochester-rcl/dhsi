@@ -50,6 +50,7 @@ shared/
 *.mp4
 *.mpv
 *.mkv
+*.png
 
 # Python #
 ##########
@@ -60,3 +61,8 @@ build/
 dist/
 build/
 __pycache__/
+
+# Node #
+########
+
+node_modules/

@@ -27,6 +27,10 @@ To mount a shared volume, you can run the container with the *-v* flag:
 Where [path/to/folder/on/host] is the **absolute path** to the folder on the host file system and [/path/to/folder/on/container] is the **absolute path** specifying where the directory will be mounted on the container's file system.
 
 
+To expose a port from your running container to the host, use the *-p* flag:
+
+`docker run -ti -p [host_port]:[container_port] [...]`
+
 ### Cleanup
 When you're finished with your containers, you can stop any running containers and / or delete them:
 
@@ -41,6 +45,10 @@ When you're finished with your containers, you can stop any running containers a
 If you want to free up space and remove an image, run:
 
 `docker rmi [name-of-repository]/[name-of-image]:[tag]`
+
+To remove all dangling images, run:
+
+`docker rmi $(docker images -f dangling=true -q)`
 
 If you are looking to automate this process, check out
 [docker-gc](https://github.com/spotify/docker-gc).
