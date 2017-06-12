@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // VideoJS
 import videojs from 'video.js';
 // CSS
-import videojsCSS from 'video.js/dist/video-js.css';
+import 'video.js/dist/video-js.css';
 
 // Lodash
 import lodash from 'lodash';

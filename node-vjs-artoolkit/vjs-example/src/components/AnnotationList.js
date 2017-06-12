@@ -6,11 +6,17 @@ import React, { Component } from 'react';
 import { Feed } from 'semantic-ui-react';
 
 const AnnotationList = (props: Object) => {
-  const { annotations } = props;
+  let { annotations } = props;
+  if (annotations.length === 0) {
+    annotations = [{
+      timecode: '00:00:00',
+      text: 'No annotations',
+    }];
+  }
   return(
     <div className="annotation-list-container">
       <Feed>
-        {annotations.map((annotation, index) => {
+        {annotations.map((annotation, index) =>
           <Feed.Event>
             <Feed.Label>
               {annotation.timecode}
@@ -21,10 +27,10 @@ const AnnotationList = (props: Object) => {
               </Feed.Summary>
             </Feed.Content>
           </Feed.Event>
-        })}
+        )}
       </Feed>
     </div>
   );
 }
 
-export default AnnotationList
+export default AnnotationList;

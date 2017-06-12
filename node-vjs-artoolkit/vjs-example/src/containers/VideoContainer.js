@@ -16,13 +16,6 @@ class VideoContainer extends Component {
   render() {
     const { src, playerOptions, plugins } = this.props;
     let { annotations } = this.state;
-    if (annotations.length === 0) {
-      annotations = [{
-        timecode: '00:00:00',
-        text: 'No annotations',
-      }];
-    }
-    console.log(annotations);
     return(
       <div className="video-annotator-container">
         <VideoPlayer src={src} playerOptions={playerOptions} plugins={plugins} />

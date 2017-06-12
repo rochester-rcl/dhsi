@@ -24,6 +24,7 @@ RUN apt-get update \
   libv4l-dev \
   libxvidcore-dev \
   libx264-dev \
+  mediainfo \
   ffmpeg \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && mkdir /home/opencv/ \

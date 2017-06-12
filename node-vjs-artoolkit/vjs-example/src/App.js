@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'semantic-ui-css/semantic.min.css';
 
 // Containers
 import VideoContainer from './containers/VideoContainer';
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <VideoContainer
-          src={[{ src: '/bunny.mp4', type: 'video/mp4'}]}
+          src={[{ src: '/smpte.mp4', type: 'video/mp4'}]}
           playerOptions={playerOptions}
           plugins={[]}
         />
