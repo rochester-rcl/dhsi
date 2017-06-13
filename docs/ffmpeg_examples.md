@@ -36,10 +36,10 @@
 #### 3. Stream Mapping
 
 	#Copy video stream and transcode audio stream
-	ffmpeg -i /path/to/input -c:v copy -map 0:1 -c:a aac -strict -2 /path/to/output.mp4
+	ffmpeg -i /path/to/input -c:v copy -c:a aac -strict -2 /path/to/output.mp4
 
 	#Remove audio
-	ffmpeg -i /path/to/input -c:v copy -map 0:1 -an -strict -2 /path/to/output.mp4 #audio null
+	ffmpeg -i /path/to/input -c:v copy -an /path/to/output.mp4 #audio null
 
 	#Export audio and video to separate files
 	ffmpeg -i /path/to/input -map 0:0 /path/to/output.mp4 -map 0:1 /path/to/output.wav #defaults to 16 bit pcm
