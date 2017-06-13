@@ -56,7 +56,7 @@
 	ffmpeg -i input -r 24 -an -pix_fmt rgb24 /output/frames/frame_%06d.dpx
 
 	#Animate an image sequence
-	ffmpeg -i frames/frame_%06d.dpx -r 24 -vcodec prores -profile:v 2 out.mov #0 : ProRes422 (Proxy) 1 : ProRes422 (LT) 2 : ProRes422 (Normal) 3 : ProRes422 (HQ)
+	ffmpeg -i frames/frame_%06d.dpx -r 24 -c:v libx264 /path/to/output.mp4
 
 	#Altering framerates / time bases
 	ffmpeg -i /path/to/input -c:v libx264 -vf setpts=0.5*PTS /path/to/output.mp4
@@ -88,7 +88,7 @@
 	# more on levels here: https://helpx.adobe.com/photoshop/using/levels-adjustment.html
 
 	#Chaining filters
-	ffmpeg -i /path/to/input -c:v libx264 -vf crop=100:100:0:0,
+	ffmpeg -i /path/to/input -c:v libx264 -vf scale=100:100,crop=100:100:0:0 /path/to/output.mp4
 
 #### 6. Batch Processing
 
