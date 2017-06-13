@@ -60,4 +60,9 @@ RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip \
     && rm -rf opencv_contrib-3.2.0 \
     && rm opencv_contrib.zip
 
-  WORKDIR /home
+COPY opencv-examples/ /home/opencv-examples
+WORKDIR /home/opencv-examples/video_io
+RUN python3 setup.py sdist \
+    && pip3 install -e .
+
+WORKDIR /home
