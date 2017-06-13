@@ -9,7 +9,7 @@ First, install [Docker CE](https://www.docker.com/community-edition#/download)
 
 or
 
-`docker pull jromphf/node-vjs-artoolkit:0.0.3`
+`docker pull jromphf/node-vjs-artoolkit:0.0.1`
 
 ### How to run the Docker containers
 Once you have pulled the images, you can run them in an interactive bash session with the following command:
