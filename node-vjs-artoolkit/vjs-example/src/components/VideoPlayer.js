@@ -13,6 +13,7 @@ import 'video.js/dist/video-js.css';
 import lodash from 'lodash';
 
 export default class VideoPlayer extends Component {
+  state = { currentAnnotation: null }
   constructor(props: Object) {
     super(props);
   }
@@ -26,12 +27,30 @@ export default class VideoPlayer extends Component {
     if(!lodash.isEqual(currentSrc, newSrc)) {
       this.setSrc(newSrc);
     }
+    console.log(nextProps.isPlaying);
+    if (nextProps.isPlaying === true) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
   }
   componentWillUnmount(): void {
     this.player.dispose();
   }
   render() {
-    return(<video ref="videoJSPlayer" className="video-js vjs-default-skin vjs-big-play-centered">{this.props.children}</video>);
+    const { currentAnnotation } = this.state;
+    return(
+      <div className="annotation-container">
+        <div className={currentAnnotation ? "annotation-display-show" : "annotation-display-hidden"}>
+          {currentAnnotation ? currentAnnotation : ''}
+        </div>
+        <video
+          ref="videoJSPlayer"
+          className="video-js vjs-default-skin vjs-big-play-centered">
+          {this.props.children}
+        </video>
+      </div>
+    );
   }
   // Player related methods
   initPlayer(): void {
@@ -40,6 +59,31 @@ export default class VideoPlayer extends Component {
     this.player = videojs(this.getPlayerElement(), options);
     this.player.src(src);
     this.registerPlugins();
+    this.player.on('play', () => {
+      this.props.setPlayingState(true);
+    });
+    this.player.on('pause', () => {
+      this.props.setPlayingState(false);
+    });
+    this.player.on('timeupdate', () => {
+      let timestamp = parseInt(this.player.currentTime(), 10);
+      console.log(timestamp);
+      this.searchAnnotations(timestamp);
+    });
+
+  }
+  searchAnnotations(timestamp) {
+    let result = this.props.comparativeAnnotations.find((annotation) => { return annotation.time === timestamp });
+    if (result) {
+      console.log(result.note);
+      this.setState({ currentAnnotation: result.note });
+      this.sleep(result.duration * 1000).then(() => this.setState({ currentAnnotation: null }));
+    }
+  }
+  sleep(duration) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => { resolve() }, duration);
+    });
   }
   // Assuming all videojs plugins are written according to https://github.com/videojs/video.js/blob/master/docs/guides/plugins.md
   registerPlugins(): void {

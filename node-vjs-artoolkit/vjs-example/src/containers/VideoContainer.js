@@ -14,22 +14,21 @@ class VideoContainer extends Component {
     super(props);
   }
   render() {
-    const { src, playerOptions, plugins } = this.props;
+    const { src, playerOptions, plugins, isPlaying, setPlayingState, comparativeAnnotations } = this.props;
     let { annotations } = this.state;
     return(
       <div className="video-annotator-container">
-        <VideoPlayer src={src} playerOptions={playerOptions} plugins={plugins} />
-        <AnnotationList annotations={annotations} />
+        <VideoPlayer
+          isPlaying={isPlaying}
+          src={src}
+          setPlayingState={setPlayingState}
+          playerOptions={playerOptions}
+          comparativeAnnotations={comparativeAnnotations}
+          plugins={plugins}
+        />
       </div>
     );
   }
-}
-
-VideoContainer.propTypes = {
-  src: PropTypes.array.isRequired,
-  playerOptions: PropTypes.object,
-  plugins: PropTypes.array,
-  store: PropTypes.object // option to connect to store or take props in index (must be wrapped in <Provider/>)
 }
 
 // Connect to redux store
