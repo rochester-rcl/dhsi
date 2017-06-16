@@ -25,6 +25,7 @@ RUN apt-get update \
   libxvidcore-dev \
   libx264-dev \
   mediainfo \
+  sox \
   ffmpeg \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && mkdir /home/opencv/ \
@@ -64,5 +65,10 @@ COPY opencv-examples/ /home/opencv-examples
 WORKDIR /home/opencv-examples/video_io
 RUN python3 setup.py sdist \
     && pip3 install -e .
+
+WORKDIR /home/opencv-examples/spectrogram_generator
+RUN python3 setup.py sdist \
+    && pip3 install -e .
+
 
 WORKDIR /home

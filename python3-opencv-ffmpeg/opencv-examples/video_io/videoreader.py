@@ -43,6 +43,15 @@ class VideoReader(object):
             self.close()
             raise StopIteration
 
+    def get_frame(self, frame_number):
+        self._video_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+        ret, frame = self._video_cap.read()
+        if ret is True:
+            self._video_cap.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
+            return frame
+        else:
+            print('There was an error processing the frame at position {}'.format(frame_number))
+
     def close(self):
         self._video_cap.release()
 
